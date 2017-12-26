@@ -1,6 +1,6 @@
-#Djinn
+# Djinn
 
-##Description
+## Description
 
 Djinn is a simple JavaFX application that monitors Jini registrars, and the
 services known to them. It discovers registrars through Jini's
