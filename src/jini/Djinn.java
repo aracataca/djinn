@@ -43,8 +43,8 @@ import net.jini.lookup.entry.ServiceInfo;
 /**
  * Djinn comprises two loops: a scheduled loop to sense djinn activity,
  * set to run every FREQUENCY seconds; and the JavaFX event loop accessed via the
- * Platform.runLater(..) method, which animates the screen controls. Events that
- * are detected by the scheduled loop, whose body resides in the Djinn#run()
+ * <code>Platform.runLater(..)</code> method, which animates the screen controls. Events that
+ * are detected by the scheduled loop, whose body resides in the <code>Djinn#run()</code>
  * method, are wrapped in Command objects, and queued onto the JavaFX event loop
  * to be run later, to affect screen control changes.
  * 
@@ -59,7 +59,7 @@ public class Djinn extends Application implements ChangeListener, DiscoveryListe
     public static final String ALL_GROUPS = "ALL GROUPS";                       // Literal used instead of "".
     private static final String SERVICES = "Services";
     private static final String SCHEDULED = "scheduled";                        // Thread name.
-    private static final String TITLE = "Djinn1";
+    private static final String TITLE = "Djinn";
 
     // type(s)
     private Accordion accordion;
@@ -180,10 +180,10 @@ public class Djinn extends Application implements ChangeListener, DiscoveryListe
      * This is the heart of the event generator, that is run every FREQUENCY seconds.
      * It generates Discovered and Discarded events for registrar discovery and
      * partition, and Added and Removed events for service discovery and their
-     * partition. Djinn#run() accepts Djinn$Event objects generated from
-     * LookupDiscovery(..) events, that are fed in via a concurrent deque. It then
+     * partition. <code>Djinn#run()</code> accepts <code>Djinn$Event</code> objects generated from
+     * <code>LookupDiscovery(..)</code> events, that are fed in via a concurrent deque. It then
      * checks for any services associated with the new registrar via a call to
-     * ServiceRegistrar#lookup(..), before executing the major part of the run()
+     * <code>ServiceRegistrar#lookup(..)</code>, before executing the major part of the run()
      * method.
      */
     // Runnable
@@ -218,7 +218,7 @@ public class Djinn extends Application implements ChangeListener, DiscoveryListe
 
             } catch (RemoteException e) {}
 
-        /**
+        /*
          * The "major part". This polls each registrar. This is ugly but necessary
          * in order to find out exactly where a service is registered, given that
          * a single service can be registered with N registrars.
@@ -278,13 +278,19 @@ public class Djinn extends Application implements ChangeListener, DiscoveryListe
 
             } catch (Exception e) {}
 
+        /*
+         * Owing to the JavaFX bug that selects a random tree item when
+         * the tree is modified, lengthened or shortened, Djinn collapses
+         * the tree instead of showing random item data, out of sync with
+         * the item shown selected in the tree.
+         */
         if (collapse)
             Platform.runLater((Runnable) new Collapse());
 
         scheduled.schedule((Runnable) this, FREQUENCY, TimeUnit.SECONDS);
     }
 
-    public static void main(String[] args) {
+    public static final void main(String[] args) {
         Application.launch(args);
     }
 
@@ -369,7 +375,7 @@ public class Djinn extends Application implements ChangeListener, DiscoveryListe
 
             tree.getRoot().setExpanded(false);
 
-            /**
+            /*
              * Workaround. Djinn#changed(..) seems to be called during or after
              * TreeItem#setExpanded(..) is executed. The #changed(..) call, which
              * consequently calls Djinn$Changed, erroneously, can be remedied by
