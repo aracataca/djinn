@@ -281,8 +281,8 @@ public class Djinn extends Application implements ChangeListener, DiscoveryListe
         /*
          * Owing to the JavaFX bug that selects a random tree item when
          * the tree is modified, lengthened or shortened, Djinn collapses
-         * the tree instead of showing random item data, out of sync with
-         * the item shown selected in the tree.
+         * the tree instead of showing random item data, in the central pane,
+         * out of sync with the item shown selected in the tree.
          */
         if (collapse)
             Platform.runLater((Runnable) new Collapse());
