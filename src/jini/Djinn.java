@@ -284,8 +284,8 @@ public class Djinn extends Application implements ChangeListener, DiscoveryListe
          * the tree instead of showing random item data, in the central pane,
          * out of sync with the item shown selected in the tree.
          */
-        if (collapse)
-            Platform.runLater((Runnable) new Collapse());
+        //if (collapse)
+        //    Platform.runLater((Runnable) new Collapse());
 
         scheduled.schedule((Runnable) this, FREQUENCY, TimeUnit.SECONDS);
     }
