@@ -14,4 +14,5 @@ the registrar they're known to.
 Djinn will run on Java 7 & 8. It should run on Java 9, though hasn't been tested. It requires the
 * -Djava.security.manager
 * -Djava.security.policy=all.policy
+
 command line switches.
